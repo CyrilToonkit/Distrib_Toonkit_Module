@@ -42,7 +42,7 @@ if [%4]==[] (
 
 echo INCLUDES %INCLUDES%
 
-set DISTRIBPATH=%~dp0%NAME%_%VERSION%
+set DISTRIBPATH=%~dp0Distributions\%NAME%_%VERSION%
 
 call %~dp0..\Toonkit_Module_Base\DISTRIB.bat %DISTRIBPATH% %MAYANAME%
 
