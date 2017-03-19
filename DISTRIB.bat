@@ -5,7 +5,7 @@ set VERSION=0_0_0
 set INCLUDES=
 set MAYANAME=Maya
 
-echo 1%1 2%2 3%3 4%4 5%5 6%6 7%7
+set GUI=
 
 if [%1]==[] (
 	set /p NAME=Distribution name ^(defaults to '%NAME%'^) 
@@ -20,6 +20,7 @@ if [%3]==[] (
 ) else set MAYANAME=%3
 
 if [%4]==[] (
+	set GUI=TRUE
 	set /p INCLUDES=Includes ^(defaults to '%INCLUDES%', 'Toonkit_Module_Base' always included^) 
 ) else (
 	set INCLUDES=%4
@@ -40,8 +41,6 @@ if [%4]==[] (
 		)
 )
 
-echo INCLUDES %INCLUDES%
-
 set DISTRIBPATH=%~dp0Distributions\%NAME%_%VERSION%
 
 call %~dp0..\Toonkit_Module_Base\DISTRIB.bat %DISTRIBPATH% %MAYANAME%
@@ -50,4 +49,4 @@ for %%a in (%INCLUDES%) do (
 	call %~dp0..\%%a\DISTRIB.bat %DISTRIBPATH% %MAYANAME%
 )
 
-set /p TMP=Press any key to close...
+if [%GUI%] neq [] set /p TMP=Press any key to close...
