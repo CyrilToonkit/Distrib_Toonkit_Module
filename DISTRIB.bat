@@ -1,4 +1,4 @@
-@echo on
+@echo off
 
 set NAME=Toonkit_Module
 set VERSION=0_0_0
