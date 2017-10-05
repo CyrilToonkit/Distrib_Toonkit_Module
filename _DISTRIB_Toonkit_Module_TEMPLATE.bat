@@ -16,7 +16,7 @@ if [%1]==[] (
 	)
 )
 
-call %~dp0DISTRIB.bat Toonkit_Module_Lite %VERSION% Maya2015 Toonkit_Module_2015
+call %~dp0DISTRIB.bat Toonkit_Module_NAME %VERSION% Maya2016 Toonkit_Module_2016 Toonkit_Module_ADDITIONNALMODULE
 exit /b
 
 :sub
