@@ -1,10 +1,11 @@
 @echo off
+setlocal EnableDelayedExpansion
 
 set NAME=Toonkit_Module
 set VERSION=0_0_0
 set INCLUDES=
 set MAYANAME=Maya
-
+set /a COUNTER=0
 set GUI=
 
 if [%1]==[] (
@@ -23,29 +24,20 @@ if [%4]==[] (
 	set GUI=TRUE
 	set /p INCLUDES=Includes ^(defaults to '%INCLUDES%', 'Toonkit_Module_Base' always included^) 
 ) else (
-	set INCLUDES=%4
-	if [%5] neq [] (
-		set INCLUDES=%4 %5
+	for %%a in (%*) do (
+		if !COUNTER! LSS 3 (
+			set /a COUNTER=COUNTER+1
+		) else (
+			set INCLUDES=!INCLUDES! %%a
 		)
-	if [%6] neq [] (
-		set INCLUDES=%4 %5 %6
-		)
-	if [%7] neq [] (
-		set INCLUDES=%4 %5 %6 %7
-		)
-	if [%8] neq [] (
-		set INCLUDES=%4 %5 %6 %7 %8
-		)
-	if [%9] neq [] (
-		set INCLUDES=%4 %5 %6 %7 %8 %9
-		)
+	)
 )
 
 set DISTRIBPATH=%~dp0Distributions\%NAME%_%VERSION%
 
 call %~dp0..\Toonkit_Module_Base\DISTRIB.bat %DISTRIBPATH% %MAYANAME%
 
-for %%a in (%INCLUDES%) do (
+for %%a in (!INCLUDES!) do (
 	call %~dp0..\%%a\DISTRIB.bat %DISTRIBPATH% %MAYANAME%
 )
 
